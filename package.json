@@ -1,0 +1,29 @@
+{
+  "name": "the-absolute-unit",
+  "version": "1.0.0",
+  "author": "Roetm",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.2.0",
+    "chai": "^4.3.4",
+    "chai-bn": "^0.3.0",
+    "ts-node": "^10.1.0"
+  },
+  "devDependencies": {
+    "@defi.org/web3-candies": "1.x",
+    "ethereumjs-hooks": "git+https://github.com/defi-org-code/ethereumjs-hooks.git"
+  },
+  "scripts": {
+    "postinstall": "ethereumjs-hooks",
+    "prettier": "prettier --write '{contracts,src,test}/**/*.{ts,js,json,sol}'",
+    "typechain": "typechain --target=web3-v1 --out-dir=typechain-abi 'abi/**/*.json' && npx hardhat typechain",
+    "prebuild": "rm -rf artifacts && rm -rf typechain-hardhat && rm -rf typechain-abi && npm run prettier && npm run typechain",
+    "build": "npx hardhat compile && npx solhint 'contracts/**/*.sol'",
+    "quicktest": "npx hardhat test --logs",
+    "test": "npm run build && npx hardhat test --logs",
+    "deploy": "npx hardhat deploy --network $1"
+  },
+  "prettier": {
+    "printWidth": 120
+  }
+}
